@@ -38,6 +38,7 @@
     <!-- Additional Metadata -->
     <meta name="geo.region" content="SG">
     <meta name="geo.placename" content="Singapore">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
     <link rel="icon" type="image/png"
@@ -47,11 +48,24 @@
     <link rel="stylesheet"
         href="https://cdn.shortpixel.ai/client/q_loseless,ret_wait/https://miuohcetrjihx34xc.com/nanrentiantang/style.css">
 
-    <style>
-        * {
-            scroll-behavior: smooth;
-        }
-    </style>
+   <style>
+  * {
+    scroll-behavior: smooth;
+  }
+
+  /* 只在手机上放大导航文字 */
+  @media (max-width: 768px) {
+    .menu a {
+      font-size: 18px; /* 调整到你觉得合适的大小 */
+    }
+
+    /* 如果图标和文字之间太挤，可以顺便调一下间距 */
+    .menu a i {
+      margin-right: 4px;
+    }
+  }
+</style>
+
 
 </head>
 
