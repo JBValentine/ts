@@ -1,64 +1,591 @@
-<style>
-  * {
-    scroll-behavior: smooth;
-  }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- Basic Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  /* 只在手机上放大导航文字 */
-  @media (max-width: 768px) {
-    .menu a {
-      font-size: 18px; /* 调整到你觉得合适的大小 */
+  <!-- SEO Meta Tags -->
+  <title>狮城BBS - 新加坡华人论坛｜本地生活·招聘求职·二手交易·吃喝玩乐</title>
+  <meta name="description" content="狮城BBS，新加坡本地华人社区论坛。覆盖本地新闻、求职招聘、房屋租赁、二手交易、吃喝玩乐、留学签证、交友活动等话题。加入我们，分享狮城生活。">
+  <meta name="keywords" content="狮城BBS, 新加坡论坛, 新加坡华人, 新加坡求职, 新加坡租房, 新加坡二手, 新加坡活动, Singapore Chinese forum, SG BBS">
+  <meta name="author" content="狮城BBS" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://massagesg.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://massagesg.com/" />
+  <meta property="og:title" content="狮城BBS - 新加坡华人论坛" />
+  <meta property="og:description" content="新加坡本地华人社区论坛：新闻资讯、求职招聘、租房转租、二手交易、本地吃喝玩乐、移民留学、签证攻略与交友活动。" />
+  <meta property="og:image" content="https://massagesg.com/images/og-bbs.jpg" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="狮城BBS" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://massagesg.com/" />
+  <meta name="twitter:title" content="狮城BBS - 新加坡华人论坛" />
+  <meta name="twitter:description" content="新加坡本地华人社区论坛：新闻、招聘、租房、二手、吃喝玩乐与交友活动。" />
+  <meta name="twitter:image" content="https://massagesg.com/images/twitter-bbs.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./images/favicon.jpg" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17697307982"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date()); gtag('config', 'AW-17697307982');
+  </script>
+
+  <!-- JSON-LD: WebSite + SearchAction -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"狮城BBS",
+    "url":"https://massagesg.com/",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://massagesg.com/search?q={query}",
+      "query-input":"required name=query"
+    }
+  }
+  </script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Montserrat',sans-serif;color:#333;line-height:1.6;overflow-x:hidden}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Animations (kept) */
+    .fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s ease, transform .8s ease}
+    .fade-in.active{opacity:1;transform:translateY(0)}
+    .slide-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease, transform .8s ease}
+    .slide-left.active{opacity:1;transform:translateX(0)}
+    .slide-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease, transform .8s ease}
+    .slide-right.active{opacity:1;transform:translateX(0)}
+    .scale-in{opacity:0;transform:scale(.8);transition:opacity .6s ease, transform .6s ease}
+    .scale-in.active{opacity:1;transform:scale(1)}
+
+    /* Header */
+    header{background:#FFFCF9;padding:20px 0;position:fixed;top:0;width:100%;z-index:1000;box-shadow:0 2px 5px rgba(0,0,0,.1);transition:all .3s ease;transform:none!important;backface-visibility:hidden}
+    header.scrolled{padding:15px 0;background:rgba(255,255,255,.98)}
+    .header-content{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 20px}
+    .logo{font-family:'Great Vibes',cursive;font-size:36px;color:#333;text-align:center}
+    .logo span{font-size:12px;font-family:'Montserrat',sans-serif;display:block;text-align:center;letter-spacing:2px}
+    nav ul{display:flex;list-style:none;gap:30px}
+    nav a{text-decoration:none;color:#666;font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all .3s ease;position:relative}
+    nav a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:#c9a96e;transition:width .3s ease}
+    nav a:hover{color:#c9a96e}
+    nav a:hover::after{width:100%}
+
+    /* Search bar in header */
+    .searchbar{display:flex;align-items:center;gap:10px;margin-left:20px}
+    .searchbar input{height:36px;padding:0 12px;border:1px solid #ddd;border-radius:18px;outline:none;min-width:220px}
+    .searchbar button{height:36px;padding:0 14px;border-radius:18px;border:0;background:#c9a96e;color:#fff;cursor:pointer;font-size:13px}
+    .searchbar button:hover{filter:brightness(.92)}
+
+    /* Hero -> Forum Welcome */
+    .hero{height:70vh;background:linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url('./images/sg-city-night.jpg') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;color:#FFFCF9;padding-top:80px}
+    .hero-content h1{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;margin-bottom:18px;line-height:1.35;animation:fadeInUp 1s ease}
+    .hero-content p{opacity:.95;margin-bottom:28px}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .hero-buttons{display:flex;gap:16px;justify-content:center;animation:fadeInUp 1s ease .2s both}
+    .btn{padding:12px 28px;border:2px solid #FFFCF9;background:transparent;color:#FFFCF9;text-decoration:none;text-transform:uppercase;font-size:12px;letter-spacing:2px;transition:all .3s ease;cursor:pointer;position:relative;overflow:hidden;border-radius:28px}
+    .btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:#FFFCF9;transition:left .35s ease;z-index:-1}
+    .btn:hover::before{left:0}
+    .btn:hover{color:#333;transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,.25)}
+
+    /* Sections */
+    .intro-section{padding:70px 0;text-align:center;background:#FFFCF9;position:relative}
+    .intro-section h2{font-family:'Cormorant Garamond',serif;font-size:34px;margin-bottom:14px;color:#333;font-weight:600}
+    .intro-section p{color:#666;max-width:760px;margin:0 auto;line-height:1.8}
+
+    /* Forum Categories Grid (3 cols) */
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px;z-index:1;position:relative}
+    .service-card{position:relative;overflow:hidden;height:180px;cursor:pointer;transition:transform .3s ease;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);background:#fff;border:1px solid #eee}
+    .service-card:hover{transform:translateY(-6px)}
+    .service-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;filter:brightness(.9)}
+    .service-card:hover img{transform:scale(1.05)}
+    .service-overlay{position:absolute;inset:auto 0 0 0;background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 100%);color:#fff;padding:16px 18px;text-align:left}
+    .service-overlay h3{font-size:18px;font-weight:700;margin-bottom:6px}
+    .service-overlay p{font-size:12px;opacity:.9}
+
+    /* Singapore tagline */
+    .singapore-section{padding:56px 0;text-align:center}
+    .singapore-section h2{font-family:'Cormorant Garamond',serif;font-size:30px;margin-bottom:8px}
+    .singapore-section p{color:#666}
+
+    /* Forum main: Latest + Snapshot */
+    .pricing-section{padding:80px 0;background:linear-gradient(135deg,#f5f5f5 0%, #FFFCF9 100%)}
+    .pricing-section h2{font-family:'Cormorant Garamond',serif;font-size:32px;text-align:center;margin-bottom:16px;color:#2c2c2c}
+    .pricing-intro{text-align:center;color:#666;max-width:700px;margin:0 auto 36px}
+    .pricing-content{display:grid;grid-template-columns:2fr 1fr;gap:36px;align-items:start}
+
+    /* Thread list -> reuse pricing-list styles */
+    .thread-list .thread-item{display:grid;grid-template-columns:auto 1fr auto;gap:14px;padding:16px 18px;margin-bottom:14px;border-radius:12px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05);border-left:4px solid transparent;transition:all .3s ease;border:1px solid #eee}
+    .thread-list .thread-item:hover{transform:translateX(6px);box-shadow:0 6px 20px rgba(201,169,110,.18);border-left-color:#c9a96e;background:linear-gradient(135deg,#fff9f0 0%,#ffffff 100%)}
+    .avatar{width:42px;height:42px;border-radius:50%;background:#eee;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:18px}
+    .thread-title{font-weight:700;margin-bottom:6px}
+    .thread-meta{font-size:12px;color:#777}
+    .thread-tags{margin-top:6px;display:flex;gap:8px;flex-wrap:wrap}
+    .thread-tags span{font-size:12px;padding:4px 10px;border-radius:16px;background:#f4f4f4;color:#555}
+    .thread-stats{text-align:right;font-size:12px;color:#666;min-width:88px}
+    .thread-stats div{margin-bottom:4px}
+
+    /* Snapshot sticky card */
+    .pricing-image{height:auto;min-height:320px;background:linear-gradient(135deg,#2b2b2b,#444);border-radius:15px;box-shadow:0 10px 40px rgba(0,0,0,.15);position:sticky;top:120px;display:flex;flex-direction:column;gap:14px;padding:20px;color:#fff}
+    .snapshot-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:rgba(255,255,255,.06);border-radius:10px}
+    .snapshot-row strong{font-size:14px}
+    .snapshot-row span{font-size:14px;opacity:.95}
+    .snapshot-title{font-size:18px;font-weight:700;margin-bottom:6px}
+    .snapshot-sub{font-size:12px;opacity:.85;margin-bottom:8px}
+
+    /* Rules (team-section repurposed) */
+    .team-section{padding:80px 0;background:linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('./images/forum-bg.jpg') center/cover;color:#FFFCF9;text-align:center}
+    .team-section h2{font-family:'Cormorant Garamond',serif;font-size:32px;margin-bottom:24px}
+    .team-content{max-width:900px;margin:0 auto;line-height:1.8;text-align:left}
+    .team-content p{margin-bottom:14px}
+    .team-content ul{margin:6px 0 16px 20px}
+    .team-content li{margin:6px 0}
+
+    /* Footer */
+    footer{background:#0C0B0CE3;color:#FFFCF9;padding:60px 0 30px;position:relative;overflow:hidden}
+    .footer-overlay{inset:0;position:absolute;top:0;left:0;height:100%;min-height:600px;background-image:url(./images/leaf-1.png);background-position:bottom left;background-repeat:no-repeat;background-size:25% auto;opacity:.07;transition:background .3s, border-radius .3s, opacity .3s}
+    .footer-content{display:grid;grid-template-columns:repeat(3,1fr);gap:60px;margin-bottom:40px;z-index:1;position:relative}
+    .footer-section h3{font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:14px}
+    .footer-section ul{list-style:none}
+    .footer-section a{color:#ccc;text-decoration:none;line-height:2;font-size:14px;transition:all .3s ease;display:inline-block}
+    .footer-section a:hover{color:#FFFCF9;transform:translateX(5px)}
+    .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid #333;font-size:12px;color:#888}
+
+    /* Floating chat */
+    .chat-container{position:fixed;bottom:20px;right:20px;z-index:1000}
+    .chat-menu{display:none;flex-direction:column;gap:10px;margin-bottom:10px;animation:slideUp .3s ease-out}
+    .chat-menu.active{display:flex}
+    .chat-item{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s ease;box-shadow:0 4px 15px rgba(0,0,0,.2);text-decoration:none;color:white;font-size:24px}
+    .chat-item:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+    .wechat{background:#1aad19}
+    .whatsapp{background:#25d366}
+    .telegram{background:#0088cc}
+    .main-chat-btn{width:70px;height:70px;border-radius:50%;background:#4285f4;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.3);transition:all .3s ease;color:white;font-size:28px;position:relative;overflow:hidden;animation:buttonPulse 3s infinite}
+    .main-chat-btn:hover{transform:scale(1.1)}
+    .main-chat-btn.active{background:#dc3545;animation:buttonPulseActive 3s infinite}
+    @keyframes ripple{0%{width:0;height:0;opacity:.8}50%{width:100px;height:100px;opacity:.4}100%{width:140px;height:140px;opacity:0}}
+    .main-chat-btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,.3);transform:translate(-50%,-50%);animation:ripple 2s infinite}
+    .main-chat-btn::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,.2);transform:translate(-50%,-50%);animation:ripple 2s infinite .5s}
+    @keyframes buttonPulse{0%,100%{box-shadow:0 6px 20px rgba(0,0,0,.3),0 0 0 0 rgba(66,133,244,.7)}50%{box-shadow:0 6px 20px rgba(0,0,0,.3),0 0 0 10px rgba(66,133,244,0)}}
+    @keyframes buttonPulseActive{0%,100%{box-shadow:0 6px 20px rgba(0,0,0,.3),0 0 0 0 rgba(220,53,69,.7)}50%{box-shadow:0 6px 20px rgba(0,0,0,.3),0 0 0 10px rgba(220,53,69,0)}}
+
+    /* Modal (WeChat kept) */
+    .wechat-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:2000;animation:fadeIn .3s ease-out}
+    .wechat-modal.active{display:flex}
+    .modal-content-chat{background:#fff;padding:30px;border-radius:15px;text-align:center;max-width:400px;width:90%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+    .modal-header-chat{background:#1aad19;color:#fff;padding:15px;border-radius:10px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:18px;font-weight:bold}
+    .wechat-id{background:#f8f9fa;padding:15px;border-radius:10px;margin-bottom:20px;font-family:monospace;font-size:16px;color:#333;border:2px dashed #1aad19}
+    .close-modal{position:absolute;top:-10px;right:-10px;width:30px;height:30px;border-radius:50%;background:#dc3545;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .3s ease}
+    .close-modal:hover{transform:scale(1.1);background:#c82333}
+
+    /* Hamburger */
+    .hamburger{display:none;font-size:28px;cursor:pointer;color:#333;transition:color .3s ease}
+    .hamburger:hover{color:#c9a96e}
+
+    /* Responsive */
+    @media (max-width: 992px){
+      .pricing-content{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:1fr 1fr}
+      .searchbar{display:none}
+    }
+    @media (max-width: 768px){
+      .hamburger{display:block;z-index:9}
+      nav{position:fixed;top:0;right:-100%;width:100%;height:100vh;background:#fff;box-shadow:-2px 0 10px rgba(0,0,0,.1);transition:right .3s ease;padding:30px 20px}
+      nav.active{right:0}
+      nav ul{flex-direction:column;gap:28px;position:absolute;top:12%}
+      nav a{font-size:16px;color:#333}
+      nav a:hover{color:#c9a96e}
+      .hamburger.active i::before{content:"\eb99";font-family:"remixicon"}
+      .hero{height:62vh}
+      .hero-content h1{font-size:32px}
+      .hero-content p{font-size:14px}
+      .services-grid{grid-template-columns:1fr}
+      .chat-container{bottom:15px;right:15px}
+      .chat-item{width:50px;height:50px;font-size:20px}
+      .main-chat-btn{width:60px;height:60px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="/" class="logo" style="text-decoration:none;">
+        狮城BBS
+        <span>SINGAPORE • COMMUNITY • FORUM</span>
+      </a>
+
+      <!-- Search -->
+      <div class="searchbar">
+        <input id="q" type="search" placeholder="搜索帖子 / 板块 / 用户…" />
+        <button onclick="onSearch()"><i class="ri-search-line"></i> 搜索</button>
+      </div>
+
+      <!-- Hamburger -->
+      <div class="hamburger"><i class="ri-menu-line"></i></div>
+
+      <nav>
+        <ul>
+          <li><a href="#home">论坛首页</a></li>
+          <li><a href="#boards">板块</a></li>
+          <li><a href="#latest">最新</a></li>
+          <li><a href="#rules">规则</a></li>
+          <li><a href="#contact">联系我们</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero: Forum Welcome -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>狮城华人都在这里聊</h1>
+      <p>本地新闻 · 求职招聘 · 房屋租赁 · 二手交易 · 吃喝玩乐 · 签证移民 · 交友活动</p>
+      <div class="hero-buttons">
+        <a href="#latest" class="btn">浏览最新帖子</a>
+        <a href="https://t.me/Xiaoliang20011" target="_blank" class="btn">注册 / 登录</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Boards (categories) -->
+  <section class="intro-section" id="boards">
+    <div class="container">
+      <h2 class="fade-in">热门板块</h2>
+      <p class="fade-in">选择一个板块开始发帖或参与讨论。</p>
+
+      <div class="services-grid">
+        <!-- 招聘求职 -->
+        <a class="service-card scale-in" href="#latest" title="招聘 · 求职">
+          <img src="./images/board-jobs.jpg" alt="招聘求职">
+          <div class="service-overlay">
+            <h3><i class="ri-briefcase-4-line"></i> 招聘 · 求职</h3>
+            <p>全职兼职 | 薪资福利 | 内推机会</p>
+          </div>
+        </a>
+        <!-- 房屋租赁 -->
+        <a class="service-card scale-in" href="#latest" title="房屋租赁">
+          <img src="./images/board-rent.jpg" alt="房屋租赁">
+          <div class="service-overlay">
+            <h3><i class="ri-home-5-line"></i> 房屋租赁</h3>
+            <p>整租合租 | 转租求租 | 邻里讨论</p>
+          </div>
+        </a>
+        <!-- 二手交易 -->
+        <a class="service-card scale-in" href="#latest" title="二手交易">
+          <img src="./images/board-market.jpg" alt="二手交易">
+          <div class="service-overlay">
+            <h3><i class="ri-shopping-bag-3-line"></i> 二手交易</h3>
+            <p>数码家电 | 家具闲置 | 面交邮寄</p>
+          </div>
+        </a>
+        <!-- 吃喝玩乐 -->
+        <a class="service-card scale-in" href="#latest" title="吃喝玩乐">
+          <img src="./images/board-food.jpg" alt="吃喝玩乐">
+          <div class="service-overlay">
+            <h3><i class="ri-restaurant-2-line"></i> 吃喝玩乐</h3>
+            <p>美食探店 | 周末出游 | 活动分享</p>
+          </div>
+        </a>
+        <!-- 留学签证 -->
+        <a class="service-card scale-in" href="#latest" title="留学签证">
+          <img src="./images/board-visa.jpg" alt="留学签证">
+          <div class="service-overlay">
+            <h3><i class="ri-passport-line"></i> 留学签证</h3>
+            <p>入境政策 | 学校专业 | 求助答疑</p>
+          </div>
+        </a>
+        <!-- 站务公告 -->
+        <a class="service-card scale-in" href="#rules" title="站务公告">
+          <img src="./images/board-announce.jpg" alt="站务公告">
+          <div class="service-overlay">
+            <h3><i class="ri-notification-3-line"></i> 站务公告</h3>
+            <p>规则更新 | 活动发起 | 功能建议</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tagline -->
+  <section class="singapore-section">
+    <div class="container">
+      <h2 class="fade-in">新加坡本地华人社区 · 狮城生活更简单</h2>
+      <p class="fade-in">分享经验 · 解决问题 · 建立连接</p>
+    </div>
+  </section>
+
+  <!-- Latest Threads + Snapshot -->
+  <section class="pricing-section" id="latest">
+    <div class="container">
+      <h2 class="fade-in">最新帖子</h2>
+      <p class="pricing-intro fade-in">看看大家刚刚在聊什么，也欢迎你立即发帖。</p>
+
+      <div class="pricing-content">
+        <div class="thread-list slide-left">
+          <!-- 1 -->
+          <div class="thread-item">
+            <div class="avatar"><i class="ri-user-3-line"></i></div>
+            <div>
+              <div class="thread-title"><a href="#" style="text-decoration:none;color:#333">[招聘] 金文泰餐厅诚聘全职前台，$2.6k–$3.2k，包餐与班车</a></div>
+              <div class="thread-meta">板块：招聘求职 · 发帖人：@SGHiring · 1 小时前 · 最后回复：@Neo</div>
+              <div class="thread-tags">
+                <span>#全职</span><span>#餐饮</span><span>#急招</span>
+              </div>
+            </div>
+            <div class="thread-stats">
+              <div><i class="ri-eye-line"></i> 1,284</div>
+              <div><i class="ri-chat-3-line"></i> 23</div>
+              <div><i class="ri-thumb-up-line"></i> 18</div>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="thread-item">
+            <div class="avatar"><i class="ri-user-3-line"></i></div>
+            <div>
+              <div class="thread-title"><a href="#" style="text-decoration:none;color:#333">[租房] 武吉士近地铁主人房 12/01 可入住，限一人</a></div>
+              <div class="thread-meta">板块：房屋租赁 · 发帖人：@Summer · 2 小时前 · 最后回复：@Lee</div>
+              <div class="thread-tags">
+                <span>#近地铁</span><span>#包水电</span>
+              </div>
+            </div>
+            <div class="thread-stats">
+              <div><i class="ri-eye-line"></i> 932</div>
+              <div><i class="ri-chat-3-line"></i> 11</div>
+              <div><i class="ri-thumb-up-line"></i> 6</div>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="thread-item">
+            <div class="avatar"><i class="ri-user-3-line"></i></div>
+            <div>
+              <div class="thread-title"><a href="#" style="text-decoration:none;color:#333">[二手] iPhone 14 Pro 256G 石墨色，电池 90%，支持当面交易</a></div>
+              <div class="thread-meta">板块：二手交易 · 发帖人：@Aaron · 3 小时前 · 最后回复：@M</div>
+              <div class="thread-tags">
+                <span>#数码</span><span>#当面验机</span>
+              </div>
+            </div>
+            <div class="thread-stats">
+              <div><i class="ri-eye-line"></i> 1,102</div>
+              <div><i class="ri-chat-3-line"></i> 17</div>
+              <div><i class="ri-thumb-up-line"></i> 12</div>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="thread-item">
+            <div class="avatar"><i class="ri-user-3-line"></i></div>
+            <div>
+              <div class="thread-title"><a href="#" style="text-decoration:none;color:#333">[吃喝玩乐] 年末必吃 8 家肉骨茶清单，最后一家夜宵开到 2 点</a></div>
+              <div class="thread-meta">板块：吃喝玩乐 · 发帖人：@Foodie · 5 小时前 · 最后回复：@JR</div>
+              <div class="thread-tags">
+                <span>#探店</span><span>#清单</span>
+              </div>
+            </div>
+            <div class="thread-stats">
+              <div><i class="ri-eye-line"></i> 2,031</div>
+              <div><i class="ri-chat-3-line"></i> 36</div>
+              <div><i class="ri-thumb-up-line"></i> 44</div>
+            </div>
+          </div>
+
+          <!-- 发帖按钮 -->
+          <div style="display:flex;gap:12px;margin-top:10px">
+            <a class="btn" href="https://t.me/Xiaoliang20011" target="_blank"><i class="ri-edit-2-line"></i> 发帖</a>
+            <a class="btn" href="https://t.me/Xiaoliang20011" target="_blank"><i class="ri-user-add-line"></i> 注册 / 登录</a>
+          </div>
+        </div>
+
+        <!-- Community Snapshot -->
+        <aside class="pricing-image">
+          <div class="snapshot-title"><i class="ri-pie-chart-2-line"></i> 社区快照</div>
+          <div class="snapshot-sub">数据每 10 分钟刷新</div>
+          <div class="snapshot-row"><strong>当前在线</strong><span>356 人</span></div>
+          <div class="snapshot-row"><strong>今日发帖</strong><span>128 篇</span></div>
+          <div class="snapshot-row"><strong>本周热帖</strong><span>28 篇 > 50 回复</span></div>
+          <div class="snapshot-row"><strong>注册会员</strong><span>42,509</span></div>
+          <div class="snapshot-row"><strong>活跃板块</strong><span>招聘 · 租房 · 二手</span></div>
+          <div class="snapshot-row"><strong>官方电报群</strong><span><a href="https://t.me/Xiaoliang20011" target="_blank" style="color:#fff;text-decoration:underline">点击加入</a></span></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rules / Privacy reused -->
+  <section class="team-section" id="rules">
+    <div class="container">
+      <h2 class="fade-in">社区规则与发帖须知</h2>
+      <div class="team-content fade-in">
+        <p>为维护友好、真实、有效的交流环境，请发帖/回帖前阅读以下规则：</p>
+        <ul>
+          <li>真实分类与标题：招聘、租房、二手请按相应板块发布，标题清晰标注【地区/关键词/价格】。</li>
+          <li>禁止诈骗与钓鱼链接：涉及金钱交易请线下当面核验，谨防第三方收款与假中介。</li>
+          <li>友善发言：禁止人身攻击、歧视与恶意引战，尊重他人观点。</li>
+          <li>隐私与合规：勿公开他人隐私信息；涉及新加坡本地法规的内容请谨慎发布。</li>
+          <li>交易范畴：二手交易以“当面验货/自愿交易”为原则，平台不承担担保责任。</li>
+        </ul>
+        <p>如需商业合作或投放，请至 <a href="#contact" style="color:#ffd;">联系我们</a>。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>常用链接</h3>
+          <ul>
+            <li><a href="#boards">板块导航</a></li>
+            <li><a href="#latest">最新帖子</a></li>
+            <li><a href="#rules">社区规则</a></li>
+            <li><a href="https://t.me/Xiaoliang20011" target="_blank">加入Telegram群</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>联系我们</h3>
+          <p style="color:#ccc;font-size:14px;line-height:1.8;">
+      <br/>
+    
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>发帖建议</h3>
+          <ul>
+            <li><a href="#rules">如何写出高效标题</a></li>
+            <li><a href="#rules">招聘与租房发帖范例</a></li>
+            <li><a href="#rules">避免踩坑与防骗提示</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>狮城BBS：新加坡本地华人社区与生活服务平台。交流真实生活，链接同城伙伴。</p>
+        <p style="margin-top:20px;">© 2025 狮城BBS. All rights reserved.</p>
+      </div>
+    </div>
+    <div class="footer-overlay"></div>
+  </footer>
+
+  <!-- Floating Chat -->
+  <div class="chat-container">
+    <div class="chat-menu" id="chatMenu">
+      <div class="chat-item wechat" onclick="openWeChatModal()">
+        <i class="ri-wechat-fill"></i>
+      </div>
+      <a href="https://wa.me/6598705940" target="_blank" class="chat-item whatsapp">
+        <i class="ri-whatsapp-fill"></i>
+      </a>
+      <a href="https://t.me/Xiaoliang20011" target="_blank" class="chat-item telegram">
+        <i class="ri-telegram-fill"></i>
+      </a>
+    </div>
+    <div class="main-chat-btn" id="mainChatBtn" onclick="toggleChatMenu()">
+      <i class="ri-message-3-fill" id="chatIcon"></i>
+    </div>
+  </div>
+
+  <!-- WeChat Modal -->
+  <div class="wechat-modal" id="wechatModal">
+    <div class="modal-content-chat">
+      <button class="close-modal" onclick="closeWeChatModal()">x</button>
+      <div class="modal-header-chat"><i class="ri-wechat-fill"></i> WeChat ID</div>
+      <div class="wechat-id">baohan2k1</div>
+      <div class="scan-text" style="color:#6c757d;font-size:14px;margin-bottom:10px;">扫码添加：</div>
+      <div class="qr-code">
+        <img src="./images/QR-wechat.jpg" alt="WeChat QR" style="width:200px;height:200px;border-radius:10px;object-fit:cover;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function onSearch(){
+      const v=document.getElementById('q').value.trim();
+      if(!v) return;
+      // 这里替换为你真实的搜索页
+      window.location.href = '/search?q=' + encodeURIComponent(v);
     }
 
-    /* 如果图标和文字之间太挤，可以顺便调一下间距 */
-    .menu a i {
-      margin-right: 4px;
-    }
-  }
-</style>
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title"
-        content="nanrentiantang1.net 新加坡男人天堂网 | Singapore's Escort website Better than Other sgharem . QingChengWang . 倾城网 . Sammyboy . Laksaboy . sglonelyguy . sgwolf . ttvip . geylang666 . sgbeautycastles . sgvipclubs . xindusg . xfy.com . oneimpmm and Singapore Largest Escorts Directory">
-    <meta name="twitter:description"
-        content="nanrentiantang1.net 新加坡男人天堂网 | Singapore's Escort website Better than Other Sammyboy . Laksaboy . sglonelyguy . sgwolf . ttvip . sgharem . geylang666 . sgbeautycastles . sgvipclubs . xindusg . xfy.com . shichengbbs . 后宫网 . Shiok8 . 爽吧 . 美丽城堡 . oneimpmm . sgunblocked . 小妹网. SGMEIMEI . 芽笼网 . 新加坡约炮网 . 新加坡找小姐 . 新加坡外围 and Singapore Largest Escorts Directory">
-    <meta name="twitter:image"
-        content="https://cdn.shortpixel.ai/client/q_loseless,ret_wait/https://miuohcetrjihx34xc.com/nanrentiantang/n2ttChinese.png">
-    <meta name="twitter:site"
-        content="nanrentiantang1.net 新加坡男人天堂网 | Singapore's Escort website Better than Other sgharem . QingChengWang . 倾城网 . Sammyboy . Laksaboy . sglonelyguy . sgwolf . ttvip . geylang666 . sgbeautycastles . sgvipclubs . xindusg . xfy.com . oneimpmm and Singapore Largest Escorts Directory">
-
-    <!-- Dublin Core Metadata -->
-    <meta name="dc.title"
-        content="nanrentiantang1.net 新加坡男人天堂网 | Singapore's Escort website Better than Other sgharem . QingChengWang . 倾城网 . Sammyboy . Laksaboy . sglonelyguy . sgwolf . ttvip . geylang666 . sgbeautycastles . sgvipclubs . xindusg . xfy.com . oneimpmm and Singapore Largest Escorts Directory">
-    <meta name="dc.description"
-        content="nanrentiantang1.net 新加坡男人天堂网 | Singapore's Escort website Better than Other Sammyboy . Laksaboy . sglonelyguy . sgwolf . ttvip . sgharem . geylang666 . sgbeautycastles . sgvipclubs . xindusg . xfy.com . shichengbbs . 后宫网 . Shiok8 . 爽吧 . 美丽城堡 . oneimpmm . sgunblocked . 小妹网. SGMEIMEI . 芽笼网 . 新加坡约炮网 . 新加坡找小姐 . 新加坡外围 and Singapore Largest Escorts Directory">
-    <meta name="dc.subject"
-        content="nanrentiantang1.net 新加坡男人天堂网 – No.1 Singapore Escort Website and the Most Comprehensive SG Escort Directory | 新加坡伴游网 | 新加坡陪游网 | 新加坡叫鸡网 | 新加坡小姐网 | 新加坡约炮网 | 新加坡援交网 | 新加坡妓女网">
-    <meta name="dc.language" content="en">
-    <meta name="dc.coverage" content="Singapore">
-
-    <!-- Additional Metadata -->
-    <meta name="geo.region" content="SG">
-    <meta name="geo.placename" content="Singapore">
-
-
-    <link rel="icon" type="image/png"
-        href="https://cdn.shortpixel.ai/client/q_loseless,ret_wait/https://miuohcetrjihx34xc.com/nanrentiantang/n2ttChinesenobg.png?v=4">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet"
-        href="https://cdn.shortpixel.ai/client/q_loseless,ret_wait/https://miuohcetrjihx34xc.com/nanrentiantang/style.css">
-
-   <style>
-  * {
-    scroll-behavior: smooth;
-  }
-
-  /* 只在手机上放大导航文字 */
-  @media (max-width: 768px) {
-    .menu a {
-      font-size: 18px; /* 调整到你觉得合适的大小 */
+    // Toggle chat menu
+    function toggleChatMenu(){
+      const chatMenu=document.getElementById('chatMenu');
+      const mainBtn=document.getElementById('mainChatBtn');
+      const chatIcon=document.getElementById('chatIcon');
+      if(chatMenu.classList.contains('active')){
+        chatMenu.classList.remove('active'); mainBtn.classList.remove('active'); chatIcon.className='ri-message-3-fill';
+      }else{
+        chatMenu.classList.add('active'); mainBtn.classList.add('active'); chatIcon.className='ri-close-fill';
+      }
     }
 
-    /* 如果图标和文字之间太挤，可以顺便调一下间距 */
+    function openWeChatModal(){document.getElementById('wechatModal').classList.add('active');document.body.style.overflow='hidden'}
+    function closeWeChatModal(){document.getElementById('wechatModal').classList.remove('active');document.body.style.overflow='auto'}
+    document.getElementById('wechatModal').addEventListener('click',function(e){if(e.target===this){closeWeChatModal()}})
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeWeChatModal()}})
+
+    // Mobile menu
+    document.addEventListener("DOMContentLoaded",function(){
+      const hamburger=document.querySelector('.hamburger');
+      const nav=document.querySelector('nav');
+      hamburger.addEventListener('click',function(){hamburger.classList.toggle('active');nav.classList.toggle('active')});
+      document.querySelectorAll('nav a').forEach(link=>{
+        link.addEventListener('click',()=>{nav.classList.remove('active');hamburger.classList.remove('active')});
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('nav a').forEach(anchor=>{
+      anchor.addEventListener('click',function(e){
+        const targetId=this.getAttribute('href');
+        if(targetId && targetId.startsWith('#')){
+          e.preventDefault();
+          const el=document.querySelector(targetId);
+          if(el){el.scrollIntoView({behavior:'smooth',block:'start'})}
+        }
+      });
+    });
+
+    // Scroll animations
+    const observerOptions={threshold:0.1,rootMargin:'0px 0px -50px 0px'};
+    const observer=new IntersectionObserver((entries)=>{
+      entries.forEach((entry,index)=>{ if(entry.isIntersecting){ setTimeout(()=>{entry.target.classList.add('active')}, index*100); }});
+    }, observerOptions);
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.querySelectorAll('.fade-in,.slide-left,.slide-right,.scale-in').forEach(el=>observer.observe(el));
+    });
+
+    // Header scrolled
+    const header=document.querySelector('header');
+    window.addEventListener('scroll',()=>{ if(window.pageYOffset>100){header.classList.add('scrolled')} else{header.classList.remove('scrolled')}});
+  </script>
+
+  <!-- Cloudflare beacon (kept) -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+    integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+    data-cf-beacon='{"version":"2024.11.0","token":"1cb7c1ad241846a08d1e67f6775ff8de","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+    crossorigin="anonymous"></script>
+</body>
+</html>
     .menu a i {
       margin-right: 4px;
     }
