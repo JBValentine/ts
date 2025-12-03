@@ -1,0 +1,253 @@
+/* General Styles */
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+  }
+
+  .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+  }
+
+  /* Header */
+  header {
+      background: #333;
+      color: #fff;
+      padding: 10px 0;
+  }
+
+  header .logo {
+      font-size: 24px;
+      font-weight: bold;
+  }
+
+  header nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 15px;
+  }
+
+  header nav a {
+      color: #fff;
+      text-decoration: none;
+  }
+
+  header .search input {
+      padding: 5px;
+      border: none;
+      border-radius: 4px;
+  }
+
+  /* Hero Section */
+ /* Hero Section */
+.hero {
+  position: relative;
+  padding: 3rem 0;
+  color: #fff;
+  text-align: center;
+  overflow: hidden; /* 防止虚化背景超出边缘 */
+}
+
+/* 虚化背景图 */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://cdn.shortpixel.ai/client/q_loseless,ret_wait/https://miuohcetrjihx34xc.com/static/img/sgskyline.webp")
+    center center / cover no-repeat;
+  filter: blur(6px);        /* 虚化程度，想更糊可以调大一点 */
+  transform: scale(1.08);   /* 放大一点，避免边缘出现空白 */
+  z-index: 0;
+}
+
+/* 再加一层半透明黑色蒙层，让文字更醒目 */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* 0.45 深一点，想更亮就调小 */
+  z-index: 0;
+}
+
+/* 保证文字在背景之上 */
+.hero .container,
+.hero .hero-content,
+.hero .social-icons {
+  position: relative;
+  z-index: 1;
+}
+
+
+  /* Article Previews */
+  .article-previews {
+      padding: 20px 0;
+  }
+
+  .article-previews h2 {
+      margin-bottom: 20px;
+  }
+
+  .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+  }
+
+  .article-grid article {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      padding: 10px;
+  }
+
+  .article-grid img {
+      width: 20%;
+      height: auto;
+  }
+
+  .article-grid h3 a {
+      text-decoration: none;
+      color: #333;
+  }
+
+  .article-grid .btn {
+      display: inline-block;
+      padding: 5px 10px;
+      color: #fff;
+      background: #007bff;
+      text-decoration: none;
+      border-radius: 4px;
+  }
+
+  /* Latest Articles */
+  .latest-articles {
+      background: #f4f4f4;
+      padding: 20px 0;
+  }
+
+  .latest-articles h2 {
+      margin-bottom: 20px;
+  }
+
+  .article-list article {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+  }
+
+  .article-list h3 a {
+      text-decoration: none;
+      color: #333;
+  }
+
+  .article-list .btn {
+      display: inline-block;
+      padding: 5px 10px;
+      color: #fff;
+      background: #007bff;
+      text-decoration: none;
+      border-radius: 4px;
+  }
+
+  /* Footer */
+  footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+  }
+
+  /* Container styling for article previews */
+  .article-previews .container {
+      text-align: center;
+      padding: 20px;
+  }
+
+  /* Styling for the article grid */
+  .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      /* Responsive grid */
+      gap: 20px;
+      /* Space between articles */
+      margin-top: 20px;
+  }
+
+  /* Styling for individual articles */
+  .article-grid article {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ccc;
+      /* Optional: Add border to each article */
+      border-radius: 8px;
+      /* Optional: Rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      /* Optional: Add shadow to articles */
+      background-color: white;
+      /* Ensure background color is solid */
+      overflow: hidden;
+      /* Prevent overflow issues */
+  }
+
+  /* Styling for article icons */
+  .article-grid article i {
+      font-size: 3rem;
+      /* Adjust icon size */
+      margin-bottom: 10px;
+      /* Space between icon and title */
+  }
+
+  /* Styling for article titles */
+  .article-grid article h3 {
+      font-size: 1.2rem;
+      margin: 10px 0;
+      color: #333;
+      /* Standard text color */
+  }
+
+  /* Styling for article description */
+  .article-grid article p {
+      font-size: 1rem;
+      margin: 10px 0;
+      flex-grow: 1;
+      /* Ensures the description section grows to take up available space */
+      color: #555;
+      /* Slightly lighter color for description */
+  }
+
+  /* Styling for Read More link with an underscore and right arrow */
+  .article-grid article a {
+      display: inline-block;
+      padding: 5px 0;
+      margin-top: 10px;
+      text-decoration: underline;
+      /* Underline the text */
+      color: #007bff;
+      /* Blue color for the text */
+      font-weight: bold;
+      text-align: center;
+      transition: color 0.3s;
+  }
+
+  /* Add the right arrow after the Read More link */
+  .article-grid article a::after {
+      content: " →";
+      /* Right arrow */
+      font-size: 1rem;
+      /* Adjust arrow size */
+      padding-left: 5px;
+      /* Space between the link and arrow */
+  }
+
+  /* Change text color on hover */
+  .article-grid article a:hover {
+      color: #0056b3;
+      /* Darker shade of blue on hover */
+  }
